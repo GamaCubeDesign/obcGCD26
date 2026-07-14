@@ -59,3 +59,15 @@ void fsm_run(void){
 State fsm_actual_state(void) {
     return actual_state;
 }
+
+const char* fsm_state_name(State s){
+    switch(s){
+        case PRE_TEST: return "PRE_TEST";
+        case BASIC_INTERMEDIATE: return "BASIC_INTERMEDIATE";
+        case ADVANCED_AOCS: return "ADVANCED_AOCS";
+        case MISSION_ADSB: return "MISSION_ADSB";
+        case MISSION_DOWNLINK: return "MISSION_DOWNLINK";
+        case ENV_SURVIVAL: return "ENV_SURVIVAL";
+    }
+    return "UNKNOWN";
+}
