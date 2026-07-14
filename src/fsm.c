@@ -26,20 +26,20 @@ void fsm_handle_event(Event ev){
         if (ev == EV_TASK_DONE) actual_state = PRE_TEST;
         break;
 
-    case ADVANCED_AOCS:
+        case ADVANCED_AOCS:
         if (ev == EV_TASK_DONE) actual_state = PRE_TEST;
         break;
 
-    case MISSION_ADSB:
+        case MISSION_ADSB:
         if (ev == EV_ADSB_TIMEOUT || ev == EV_TC_DOWNLINK)
             actual_state = MISSION_DOWNLINK;
         break;
 
-    case MISSION_DOWNLINK:
+        case MISSION_DOWNLINK:
         if (ev == EV_TASK_DONE) actual_state = PRE_TEST;
         break;
 
-    case ENV_SURVIVAL:
+        case ENV_SURVIVAL:
         //tem q ver como sai desse modo depois
         break;
     }
@@ -47,9 +47,12 @@ void fsm_handle_event(Event ev){
 
 void fsm_run(void){
     switch(actual_state){
-        case PRE_TEST: /**/ break;
-        case MISSION_ADSB: /**/ break;
-        // other states
+        case PRE_TEST: /* pre_test_run(); */ break;
+        case BASIC_INTERMEDIATE: /* basic_intermediate_run(); */ break;
+        case ADVANCED_AOCS: /* advanced_aocs_run(); */ break;
+        case MISSION_ADSB: /* mission_adsb_run(); */ break;
+        case MISSION_DOWNLINK: /* mission_downlink_run(); */ break;
+        case ENV_SURVIVAL: /* env_survival_run(); */ break;
     }
 }
 
