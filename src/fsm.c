@@ -1,6 +1,6 @@
 #include "fsm.h"
 
-static = State actual_state;
+static State actual_state;
 
 void fsm_init(void){
     actual_state = PRE_TEST;
