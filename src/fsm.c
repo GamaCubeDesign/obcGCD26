@@ -60,6 +60,20 @@ State fsm_actual_state(void) {
     return actual_state;
 }
 
+const char* fsm_event_name(Event ev){
+    switch(ev){
+        case EV_NONE: return "EV_NONE";
+        case EV_TC_BASIC_INTER: return "EV_TC_BASIC_INTER";
+        case EV_TC_AOCS: return "EV_TC_AOCS";
+        case EV_TC_MISSION_ADSB: return "EV_TC_MISSION_ADSB";
+        case EV_TC_DOWNLINK: return "EV_TC_DOWNLINK";
+        case EV_TC_SURVIVAL: return "EV_TC_SURVIVAL";
+        case EV_TASK_DONE: return "EV_TASK_DONE";
+        case EV_ADSB_TIMEOUT: return "EV_ADSB_TIMEOUT";
+    }
+    return "UNKNOWN";
+}
+
 const char* fsm_state_name(State s){
     switch(s){
         case PRE_TEST: return "PRE_TEST";

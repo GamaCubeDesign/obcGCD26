@@ -31,5 +31,6 @@ void fsm_run(void); // ciclo unico
 void  fsm_handle_event(Event ev);
 State fsm_actual_state(void); //consulta estado atual
 const char* fsm_state_name(State s); //nome para o log
+const char* fsm_event_name(Event ev); //nome para o log
 
 #endif

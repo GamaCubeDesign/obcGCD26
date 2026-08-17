@@ -2,10 +2,12 @@
 #include <time.h>
 
 #include "fsm.h"
+#include "obclog.h"
 #include "drivers/radio.h"
 
 
 #define OBC_CYCLE_PERIOD_MS 1000
+#define OBC_LOG_PATH "obc_mission.jsonl"
 
 /* Espera do ciclo.*/
 static void obc_sleep_ms(unsigned int ms){
@@ -22,6 +24,11 @@ int main(void){
 
     fsm_init();
 
+    if (obclog_init(OBC_LOG_PATH) != 0){
+        fprintf(stderr, "[OBC] ERRO: nao foi possivel abrir %s\n", OBC_LOG_PATH);
+        return 1;
+    }
+
     if (radio_init() != 0){
         fprintf(stderr, "[OBC] ERRO: falha ao inicializar o radio\n");
         return 1;
@@ -30,16 +37,20 @@ int main(void){
     previous_state = fsm_actual_state();
 
     /* Primeiro log do sistema = sinal de vida */
+    obclog_boot(OBC_CYCLE_PERIOD_MS);
     printf("[OBC] boot - periodo do ciclo: %d ms - estado inicial: %s\n",
            OBC_CYCLE_PERIOD_MS, fsm_state_name(previous_state));
 
     while(1){
         Event ev = radio_poll_tc();
 
+        if (ev != EV_NONE) obclog_tc(ev);
+
         fsm_handle_event(ev);   /* decide para onde ir */
         fsm_run();              /* executa a acao do estado atual */
 
         if (fsm_actual_state() != previous_state){
+            obclog_transition(previous_state, fsm_actual_state());
             printf("[OBC] transicao: %s -> %s\n",
                    fsm_state_name(previous_state),
                    fsm_state_name(fsm_actual_state()));

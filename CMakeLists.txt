@@ -9,6 +9,7 @@ add_compile_options(-Wall -Wextra)
 add_executable(obc
     src/main.c
     src/fsm.c
+    src/obclog.c
     src/drivers/radio.c
 )
 
