@@ -14,10 +14,10 @@ void fsm_handle_event(Event ev){
         case PRE_TEST:
             switch(ev){
                 case EV_TC_BASIC_INTER:  actual_state = BASIC_INTERMEDIATE; break;
-                case EV_TC_ADVANCED:     actual_state = ADVANCED_AOCS;      break;
+                case EV_TC_AOCS:         actual_state = ADVANCED_AOCS;      break;
                 case EV_TC_MISSION_ADSB: actual_state = MISSION_ADSB;       break;
                 case EV_TC_DOWNLINK:     actual_state = MISSION_DOWNLINK;   break;
-                case EV_TC_ENV_SURVIVAL: actual_state = ENV_SURVIVAL;       break;
+                case EV_TC_SURVIVAL:     actual_state = ENV_SURVIVAL;       break;
                 default: break;
             }
             break;
@@ -40,7 +40,7 @@ void fsm_handle_event(Event ev){
         break;
 
         case ENV_SURVIVAL:
-        //tem q ver como sai desse modo depois
+        /*a saida deste modo nao esta definida*/
         break;
     }
 }
